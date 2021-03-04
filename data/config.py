@@ -196,6 +196,18 @@ coco2017_testdev_dataset = dataset_base.copy({
     'label_map': COCO_LABEL_MAP
 })
 
+coms6735_dataset = dataset_base.copy({
+    'name': 'coms6735',
+
+    'train_info': './data/coms/train/coco_annotations.json',
+    'train_images': './data/coms/train/images/',
+
+    'valid_info': './data/coms/val/coco_annotations.json',
+    'valid_images': './data/coms/val/images/',
+
+    'label_map': {1: 1}
+})
+
 flying_chairs_dataset = dataset_base.copy({
     'name': 'FlyingChairs',
 
@@ -802,6 +814,12 @@ yolact_edge_mobilenetv2_config = yolact_edge_config.copy({
     'name': 'yolact_edge_mobilenetv2',
 
     'backbone': mobilenetv2_backbone
+})
+
+coms6735_mobilenetv2_config = yolact_edge_mobilenetv2_config.copy({
+    'name': 'coms6735_mobilenetv2',
+    'dataset': coms6735_dataset,
+    'num_classes': len(coms6735_dataset.class_names) + 1
 })
 
 yolact_edge_vid_config = yolact_edge_config.copy({
