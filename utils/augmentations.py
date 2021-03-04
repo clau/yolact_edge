@@ -411,7 +411,9 @@ class RandomSampleCrop(object):
         while True:
             # randomly choose a mode
             if seeds is None:
-                mode = random.choice(self.sample_options)
+                # mode = random.choice(self.sample_options)
+                random_idx = random.randint(0, len(self.sample_options) - 1)
+                mode = self.sample_options[random_idx]
             else:
                 mode = seeds[0]
 
