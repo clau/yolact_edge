@@ -205,7 +205,9 @@ coms6735_dataset = dataset_base.copy({
     'valid_info': './data/coms/val/coco_annotations.json',
     'valid_images': './data/coms/val/images/',
 
-    'label_map': {1: 1}
+    'label_map': {1: 1},
+    
+    'class_names': ("card",)
 })
 
 flying_chairs_dataset = dataset_base.copy({
