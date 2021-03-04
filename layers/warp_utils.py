@@ -13,7 +13,8 @@ try:
 except:
     use_torch2trt = False
 
-use_jit = False if use_torch2trt else torch.cuda.device_count() <= 1
+# use_jit = False if use_torch2trt else torch.cuda.device_count() <= 1
+use_jit = False
 
 ScriptModuleWrapper = torch.jit.ScriptModule if use_jit else nn.Module
 script_method_wrapper = torch.jit.script_method if use_jit else lambda fn, _rcn=None: fn
