@@ -1611,7 +1611,7 @@ class Yolact(nn.Module):
         x = torch.ones((1, lateral_channels * 2, 69, 69)).cuda()
         self.trt_load_if("flow_net", trt_fn, [x], int8_mode, parent=self.flow_net, batch_size=batch_size)
 
-    def forward(self, x, extras=None):
+    def forward(self, x, extras={"backbone": "full", "interrupt": False, "keep_statistics": False, "moving_statistics": None}):
         """ The input should be of size [batch_size, 3, img_h, img_w] """
 
         if cfg.flow.train_flow:
@@ -1796,7 +1796,13 @@ class Yolact(nn.Module):
                 pred_outs['conf'] = F.softmax(pred_outs['conf'], -1)
 
             outs_wrapper["pred_outs"] = self.detect(pred_outs)
-        return outs_wrapper
+        # return outs_wrapper
+        pred_outs = outs_wrapper["pred_outs"]
+
+        priors = np.array(pred_outs["priors"])
+        np.savetxt('priors.txt', priors, fmt="%f", delimiter=",")
+        
+        return pred_outs['loc'], pred_outs['conf'], pred_outs['mask'], pred_outs['proto']
 
 
 # Some testing code
