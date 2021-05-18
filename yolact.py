@@ -1795,9 +1795,9 @@ class Yolact(nn.Module):
             else:
                 pred_outs['conf'] = F.softmax(pred_outs['conf'], -1)
 
-            outs_wrapper["pred_outs"] = self.detect(pred_outs)
+            # outs_wrapper["pred_outs"] = self.detect(pred_outs)
         # return outs_wrapper
-        pred_outs = outs_wrapper["pred_outs"]
+        # pred_outs = outs_wrapper["pred_outs"]
 
         priors = np.array(pred_outs["priors"])
         np.savetxt('priors.txt', priors, fmt="%f", delimiter=",")
